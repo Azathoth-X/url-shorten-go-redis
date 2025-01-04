@@ -2,6 +2,7 @@ package routes
 
 import (
 	"github.com/Azathoth-X/url-shorten-go-redis/database"
+	"github.com/Azathoth-X/url-shorten-go-redis/helpers"
 	"github.com/go-redis/redis/v8"
 	"github.com/gofiber/fiber/v2"
 )
@@ -16,7 +17,7 @@ func ResolveUrl(c *fiber.Ctx) error {
 
 	if err == redis.Nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"error": "url no in db",
+			"error": "url not in db",
 		})
 	} else if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
@@ -24,10 +25,11 @@ func ResolveUrl(c *fiber.Ctx) error {
 		})
 	}
 
-	rdb := database.CreateClient(1)
-	defer rdb.Close()
+	// rdb := database.CreateClient(1)
+	// defer rdb.Close()
 
-	_ = rdb.Incr(database.Ctx, "counter")
+	// _ = rdb.Incr(database.Ctx, "counter")
+	val = helpers.EnforceHTTP(val)
 	return c.Redirect(val, 301)
 
 }
