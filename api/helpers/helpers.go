@@ -18,6 +18,7 @@ func RemoveDomainError(url string) bool {
 	newurl := strings.Replace(url, "http://", "", 1)
 	newurl = strings.Replace(newurl, "https://", "", 1)
 	newurl = strings.Replace(newurl, "www.", "", 1)
+	newurl = strings.Split(newurl, "/")[0]
 
 	if newurl != os.Getenv("DOMAIN") {
 		return false
