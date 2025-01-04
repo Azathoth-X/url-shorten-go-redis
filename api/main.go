@@ -17,6 +17,7 @@ func setupRoute(app *fiber.App) {
 
 }
 
+// /less go rate limiting and stress tests left
 func main() {
 	err := godotenv.Load()
 
