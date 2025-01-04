@@ -11,7 +11,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-func setupRoute(app *fiber.app) {
+func setupRoute(app *fiber.App) {
 	app.Get("/:url", routes.ResolveUrl)
 	app.Post("/api/v1", routes.ShortenUrl)
 

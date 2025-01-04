@@ -6,6 +6,7 @@ import (
 
 	"github.com/Azathoth-X/url-shorten-go-redis/database"
 	"github.com/Azathoth-X/url-shorten-go-redis/helpers"
+	"github.com/asaskevich/govalidator"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 )
@@ -35,7 +36,7 @@ func ShortenUrl(c *fiber.Ctx) error {
 	//rate-limiting
 
 	//check iif url actual url
-	if !govalidator.IsUrl(body.URL) {
+	if !govalidator.IsURL(body.URL) {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "bruh why no url "})
 	}
 
